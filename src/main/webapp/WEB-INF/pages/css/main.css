@@ -1,0 +1,9 @@
+.form-login {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.login-error {
+    padding: 15px;
+}
