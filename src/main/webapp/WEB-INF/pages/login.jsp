@@ -9,7 +9,6 @@
     <title>XParser - Login</title>
 
     <link rel='stylesheet' href='webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
-
     <link rel='stylesheet' href='pages/css/main.css'>
 </head>
 <body>

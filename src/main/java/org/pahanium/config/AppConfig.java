@@ -114,8 +114,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean
-    public UserDetailsService getUserDetailsService() {
-        return new UserDetailsServiceImpl();
-    }
+//    @Bean
+//    public UserDetailsService getUserDetailsService() {
+//        return new UserDetailsServiceImpl();
+//    }
 }
