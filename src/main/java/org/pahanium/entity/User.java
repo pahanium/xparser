@@ -5,17 +5,21 @@ import org.pahanium.entity.enums.UserRole;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
     private int id;
 
+    @Column(nullable = false)
     private String login;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole role = UserRole.USER;
 
     public User() {
     }
