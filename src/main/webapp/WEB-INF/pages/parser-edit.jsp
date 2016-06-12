@@ -39,9 +39,9 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
-                <li><a href="/admin/parser-add">Add New Parser</a></li>
+                <li class="active"><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
             <ul class="nav nav-sidebar">
@@ -51,7 +51,19 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
+            <h1 class="page-header">Add New Parser</h1>
+
+            <form action="/admin/parser-save" method="post">
+                <div class="form-group">
+                    <label for="name">Parser Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
 
         </div>
     </div>

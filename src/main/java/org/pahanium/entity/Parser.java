@@ -8,10 +8,12 @@ import java.util.Set;
 public class Parser {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String name;
+
+    private String description;
 
     private int startLine = 1;
 
@@ -24,11 +26,11 @@ public class Parser {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")
     private Set<Upload> uploads;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,6 +40,14 @@ public class Parser {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getStartLine() {
@@ -63,7 +73,6 @@ public class Parser {
 //    public void setConsts(Set<Field> consts) {
 //        this.consts = consts;
 //    }
-
 
     public Set<Upload> getUploads() {
         return uploads;

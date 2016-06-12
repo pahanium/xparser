@@ -39,8 +39,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="/admin/parser-list">Parser list</a></li>
+                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/admin/parser-add">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
@@ -51,8 +51,41 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
 
+            <c:if test="${not empty message}">
+                <div class="alert alert-success" role="alert">${message}</div>
+            </c:if>
+
+            <h1 class="page-header">Parser List</h1>
+
+            <a href="/admin/parser-add" class="btn btn-primary" role="button">Add New Parser</a>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${parsers}" var="parser">
+                        <tr>
+                            <td>${parser.id}</td>
+                            <td>${parser.name}</td>
+                            <td>${parser.description}</td>
+                            <td>
+                                <a href="/admin/parser-edit?id=${parser.id}">edit</a>
+                                <a href="/admin/parser-delete?id=${parser.id}">delete</a>
+                                <a href="/parse?id=${parser.id}">parse</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
