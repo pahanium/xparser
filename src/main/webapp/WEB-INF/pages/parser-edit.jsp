@@ -54,13 +54,14 @@
             <h1 class="page-header">Add New Parser</h1>
 
             <form action="/admin/parser-save" method="post">
+                <input type="hidden" name="id" value="${parser.id}">
                 <div class="form-group">
                     <label for="name">Parser Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value=${parser.name}>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" value=${parser.description}>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
