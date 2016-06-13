@@ -51,9 +51,14 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <c:if test="${not empty message}">
+                <div class="alert alert-warning" role="alert">${message}</div>
+            </c:if>
+
             <h1 class="page-header">Add New Parser</h1>
 
-            <form action="/admin/parser-save" method="post">
+            <form action="/admin/parser-save" method="post" modelAttribute="parser">
                 <input type="hidden" name="id" value="${parser.id}">
                 <div class="form-group">
                     <label for="name">Parser Name</label>
