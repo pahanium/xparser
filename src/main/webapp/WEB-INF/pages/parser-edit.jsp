@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,19 +57,53 @@
                 <div class="alert alert-warning" role="alert">${message}</div>
             </c:if>
 
-            <h1 class="page-header">Add New Parser</h1>
+            <c:choose>
+                <c:when test="${empty parser.name}">
+                    <h1 class="page-header">Add New Parser</h1>
+                </c:when>
+                <c:otherwise>
+                    <h1 class="page-header">Update Parser</h1>
+                </c:otherwise>
+            </c:choose>
 
             <form action="/admin/parser-save" method="post" modelAttribute="parser">
                 <input type="hidden" name="id" value="${parser.id}">
                 <div class="form-group">
                     <label for="name">Parser Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value=${parser.name}>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="${parser.name}" required autofocus>
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" value=${parser.description}>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="${parser.description}">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="fields-panel panel panel-default">
+                    <div class="panel-heading">Fields List</div>
+                    <div class="panel-body">
+                        <c:forEach items="${parser.fields}" varStatus="loop">
+                            <div id="fields-${loop.index}-wrapper" class="form-inline field-wrapper">
+                                <input type="hidden" id="fields-${loop.index}-id" name="fields[${loop.index}].id" value="${parser.fields[loop.index].id}">
+                                <input type="hidden" id="fields-${loop.index}-remove" name="fields[${loop.index}].remove" value="0">
+                                <div class="form-group">
+                                    <label for="fields-${loop.index}-title">Title</label>
+                                    <input type="text" class="form-control" id="fields-${loop.index}-title" name="fields[${loop.index}].title" placeholder="Title" value="${parser.fields[loop.index].title}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fields-${loop.index}-column">Column</label>
+                                    <input type="text" class="form-control" id="fields-${loop.index}-column" name="fields[${loop.index}].column" placeholder="Column" value="${parser.fields[loop.index].column}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fields-${loop.index}-weight">Weight</label>
+                                    <input type="text" class="form-control" id="fields-${loop.index}-weight" name="fields[${loop.index}].weight" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
+                                </div>
+                                <a href="#" class="fields-button-remove" data-index="${loop.index}">remove</a>
+                            </div>
+                        </c:forEach>
+                        <button id="fields-button-add" type="button" class="btn btn-primary">Add Field</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
             </form>
 
         </div>
@@ -77,5 +112,55 @@
 
 <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        // Start indexing at the size of the current list
+        var index = ${fn:length(parser.fields)};
+
+        // Add a new Field
+        $("#fields-button-add").on("click", function() {
+            $(this).before(function() {
+                var html = '<div id="fields-' + index + '-wrapper" class="form-inline field-wrapper" style="display: none">\n';
+                html += '   <div class="form-group">\n';
+                html += '       <label for="fields-' + index + '-title">Title</label>\n';
+                html += '       <input type="text" class="form-control" id="fields-' + index + '-title" name="fields[' + index + '].title" placeholder="Title" required>\n';
+                html += '   </div>\n';
+                html += '   <div class="form-group">\n';
+                html += '       <label for="fields-' + index + '-column">Column</label>\n';
+                html += '       <input type="text" class="form-control" id="fields-' + index + '-column" name="fields[' + index + '].column" placeholder="Column" required>\n';
+                html += '   </div>\n';
+                html += '   <div class="form-group">\n';
+                html += '       <label for="fields-' + index + '-weight">Weight</label>\n';
+                html += '       <input type="text" class="form-control" id="fields-' + index + '-weight" name="fields[' + index + '].weight" placeholder="Weight" required>\n';
+                html += '   </div>\n';
+                html += '   <input type="hidden" id="fields-' + index + '-remove" name="fields[' + index + '].remove" value="0">\n';
+                html += '   <a href="#" class="fields-button-remove" data-index="' + index + '">remove</a>\n';
+                html += "</div>\n";
+                return html;
+            });
+            $("#fields-" + index + "-wrapper").show();
+            $("#fields-" + index + "-title").focus();
+            index++;
+            return false;
+        });
+
+        // Remove an Field
+        $("div.fields-panel").on("click", "a.fields-button-remove", function() {
+            var index2remove = $(this).data("index");
+
+            if ($("#fields-" + index2remove + "-id").length) {
+                // If field from db, hide it
+                $("#fields-" + index2remove + "-wrapper").hide();
+                $("#fields-" + index2remove + "-remove").val("1");
+            } else {
+                // Else remove
+                $("#fields-" + index2remove + "-wrapper").remove();
+            }
+            return false;
+        });
+    });
+</script>
+
 </body>
 </html>

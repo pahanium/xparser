@@ -1,6 +1,9 @@
 package org.pahanium.entity;
 
+import org.springframework.util.AutoPopulatingList;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,8 +20,8 @@ public class Parser {
 
     private int startLine = 1;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")
-    private Set<Field> fields;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Field> fields = new AutoPopulatingList<>(Field.class);
 
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")
 //    private Set<Field> consts;
@@ -58,11 +61,11 @@ public class Parser {
         this.startLine = startLine;
     }
 
-    public Set<Field> getFields() {
+    public List<Field> getFields() {
         return fields;
     }
 
-    public void setFields(Set<Field> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 

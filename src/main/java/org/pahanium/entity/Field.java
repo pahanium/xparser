@@ -8,29 +8,35 @@ import java.util.Set;
 public class Field {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String title;
 
     @ManyToMany
-    @JoinTable(name="field_function",
-            joinColumns = @JoinColumn(name="function_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="field_id", referencedColumnName="id")
+    @JoinTable(name = "field_function",
+            joinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "field_id", referencedColumnName = "id")
     )
     private Set<Function> functions;
 
+    @Column(name = "col")
+    private int column = 0;
+
     private int weight = 0;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Transient // means "not a DB field"
+    private int remove;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parser_id", nullable = false)
     private Parser parser;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,12 +56,28 @@ public class Field {
         this.functions = functions;
     }
 
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     public int getWeight() {
         return weight;
     }
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public int getRemove() {
+        return remove;
+    }
+
+    public void setRemove(int remove) {
+        this.remove = remove;
     }
 
     public Parser getParser() {

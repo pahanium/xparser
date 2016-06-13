@@ -1,13 +1,3 @@
-.form-login {
-    max-width: 400px;
-    padding: 15px;
-    margin: 0 auto;
-}
-
-.login-error {
-    padding: 15px;
-}
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
@@ -77,4 +67,18 @@ body {
 }
 .main .page-header {
     margin-top: 0;
+}
+
+.field-wrapper {
+    margin-bottom: 15px;
+}
+
+.form-login {
+    max-width: 400px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.login-error {
+    padding: 15px;
 }
