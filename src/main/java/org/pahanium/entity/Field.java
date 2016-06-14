@@ -5,7 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "field")
-public class Field {
+public class Field implements Comparable<Field> {
     @Id
     @GeneratedValue
     private long id;
@@ -86,5 +86,10 @@ public class Field {
 
     public void setParser(Parser parser) {
         this.parser = parser;
+    }
+
+    @Override
+    public int compareTo(Field o) {
+        return weight - o.weight;
     }
 }

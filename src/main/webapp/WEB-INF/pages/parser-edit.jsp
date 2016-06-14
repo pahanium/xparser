@@ -80,8 +80,10 @@
                 <div class="fields-panel panel panel-default">
                     <div class="panel-heading">Fields List</div>
                     <div class="panel-body">
+                        <div id="fields-sort">
                         <c:forEach items="${parser.fields}" varStatus="loop">
                             <div id="fields-${loop.index}-wrapper" class="form-inline field-wrapper">
+                                <span class="glyphicon glyphicon-move"></span>
                                 <input type="hidden" id="fields-${loop.index}-id" name="fields[${loop.index}].id" value="${parser.fields[loop.index].id}">
                                 <input type="hidden" id="fields-${loop.index}-remove" name="fields[${loop.index}].remove" value="0">
                                 <div class="form-group">
@@ -94,11 +96,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="fields-${loop.index}-weight">Weight</label>
-                                    <input type="text" class="form-control" id="fields-${loop.index}-weight" name="fields[${loop.index}].weight" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
+                                    <input type="text" class="form-control" id="fields-${loop.index}-weight" name="fields[${loop.index}].weight" size="4" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
                                 </div>
                                 <a href="#" class="fields-button-remove" data-index="${loop.index}">remove</a>
                             </div>
                         </c:forEach>
+                        </div>
                         <button id="fields-button-add" type="button" class="btn btn-primary">Add Field</button>
                     </div>
                 </div>
@@ -112,6 +115,7 @@
 
 <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/pages/js/html.sortable.min.js"></script>
 
 <script type="text/javascript">
     $(function() {
@@ -120,8 +124,9 @@
 
         // Add a new Field
         $("#fields-button-add").on("click", function() {
-            $(this).before(function() {
+            $("#fields-sort").append(function() {
                 var html = '<div id="fields-' + index + '-wrapper" class="form-inline field-wrapper" style="display: none">\n';
+                html += '<span class="glyphicon glyphicon-move"></span>';
                 html += '   <div class="form-group">\n';
                 html += '       <label for="fields-' + index + '-title">Title</label>\n';
                 html += '       <input type="text" class="form-control" id="fields-' + index + '-title" name="fields[' + index + '].title" placeholder="Title" required>\n';
@@ -132,7 +137,7 @@
                 html += '   </div>\n';
                 html += '   <div class="form-group">\n';
                 html += '       <label for="fields-' + index + '-weight">Weight</label>\n';
-                html += '       <input type="text" class="form-control" id="fields-' + index + '-weight" name="fields[' + index + '].weight" placeholder="Weight" required>\n';
+                html += '       <input type="text" class="form-control" id="fields-' + index + '-weight" name="fields[' + index + '].weight" size="4" placeholder="Weight" required>\n';
                 html += '   </div>\n';
                 html += '   <input type="hidden" id="fields-' + index + '-remove" name="fields[' + index + '].remove" value="0">\n';
                 html += '   <a href="#" class="fields-button-remove" data-index="' + index + '">remove</a>\n';
@@ -142,6 +147,14 @@
             $("#fields-" + index + "-wrapper").show();
             $("#fields-" + index + "-title").focus();
             index++;
+
+            // Reload sort
+            $("#fields-sort").sortable('reload');
+            // Reindex weight
+            $("#fields-sort input[name$='weight']").each(function(index, element){
+                element.value = index+1;
+            });
+
             return false;
         });
 
@@ -159,8 +172,18 @@
             }
             return false;
         });
+
+        $("#fields-sort").sortable({
+            //option
+            forcePlaceholderSize: true
+        }).bind("sortstop", function (e, ui) {
+            $("#fields-sort input[name$='weight']").each(function(index, element){
+                element.value = index+1;
+            });
+        });
     });
 </script>
+
 
 </body>
 </html>
