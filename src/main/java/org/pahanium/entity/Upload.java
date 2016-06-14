@@ -1,34 +1,43 @@
 package org.pahanium.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Set;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "upload")
 public class Upload {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     private String filename;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    //@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date date;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parser_id", nullable = false)
     private Parser parser;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "upload")
-    private Set<Row> rows;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "upload", cascade = CascadeType.ALL)
+    private List<Row> rows = new LinkedList<>();
 
-    public int getId() {
+    public Upload() {
+    }
+
+    public Upload(String filename, Parser parser) {
+        this.filename = filename;
+        this.parser = parser;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -56,11 +65,21 @@ public class Upload {
         this.parser = parser;
     }
 
-    public Set<Row> getRows() {
+    public List<Row> getRows() {
         return rows;
     }
 
-    public void setRows(Set<Row> rows) {
+    public void setRows(List<Row> rows) {
         this.rows = rows;
+    }
+
+    public void addRow(Row newRow) {
+        newRow.setUpload(this);
+        rows.add(newRow);
+    }
+
+    @PrePersist
+    void createdAt() {
+        this.date = new Date();
     }
 }

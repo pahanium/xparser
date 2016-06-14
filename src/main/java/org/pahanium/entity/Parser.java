@@ -26,7 +26,7 @@ public class Parser {
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")
 //    private Set<Field> consts;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parser")
     private Set<Upload> uploads;
 
     public long getId() {

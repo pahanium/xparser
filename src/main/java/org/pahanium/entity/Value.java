@@ -9,11 +9,23 @@ public class Value {
     @GeneratedValue
     private int id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "row_id", nullable = false)
     private Row row;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "field_id", nullable = false)
+    private Field field;
+
     private String value;
+
+    public Value() {
+    }
+
+    public Value(Field field, String value) {
+        this.field = field;
+        this.value = value;
+    }
 
     public int getId() {
         return id;
