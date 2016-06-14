@@ -39,8 +39,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="/admin/parser-add">Parser list</a></li>
+                <li class="active"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="#">Export</a></li>
             </ul>
@@ -55,37 +55,21 @@
             <c:if test="${not empty message}">
                 <div class="alert alert-success" role="alert">${message}</div>
             </c:if>
+            <c:if test="${not empty messageFail}">
+                <div class="alert alert-warning" role="alert">${messageFail}</div>
+            </c:if>
 
-            <h1 class="page-header">Parser List</h1>
+            <h1 class="page-header">Parse</h1>
 
-            <a href="/admin/parser-add" class="btn btn-primary" role="button">Add New Parser</a>
+            <p>Name : ${parser.name}</p>
 
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${parsers}" var="parser">
-                        <tr>
-                            <td>${parser.id}</td>
-                            <td>${parser.name}</td>
-                            <td>${parser.description}</td>
-                            <td>
-                                <a href="/admin/parser-edit?id=${parser.id}">edit</a>
-                                <a href="/admin/parser-delete?id=${parser.id}">delete</a>
-                                <a href="/process?id=${parser.id}">parse</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
+            <form action="/process?id=${parser.id}" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="file">File to upload</label>
+                    <input type="file" id="file" name="file" />
+                </div>
+                <input type="submit" class="btn btn-primary" value="Upload" />
+            </form>
         </div>
     </div>
 </div>
