@@ -35,12 +35,16 @@ public class ProcessServiceImpl implements ProcessService {
             org.pahanium.entity.Row newRow = new org.pahanium.entity.Row(row.getRowNum());
             upload.addRow(newRow);
             for (Field field : fields) {
-                String str = row.getCell(field.getColumn()).toString();
-                newRow.addValue(new Value(field, str));
+                Cell cell = row.getCell(field.getColumn());
+                if (cell != null) {
+                    String str = row.getCell(field.getColumn()).toString();
+                    newRow.addValue(new Value(field, str));
+                }
             }
             System.out.println(newRow);
         }
 
+        upload.setRowsCount(upload.getRows().size());
         uploadService.save(upload);
     }
 }

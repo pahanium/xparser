@@ -18,7 +18,17 @@ public class UploadServiceImpl implements UploadService {
     }
 
     @Override
+    public List<Upload> getLast() {
+        return uploadRepository.getLast();
+    }
+
+    @Override
     public void save(Upload upload) {
         uploadRepository.save(upload);
+    }
+
+    @Override
+    public Upload findOne(Long id) {
+        return uploadRepository.findOne(id);
     }
 }

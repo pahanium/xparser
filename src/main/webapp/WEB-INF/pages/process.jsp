@@ -68,7 +68,7 @@
                     <label for="file">File to upload</label>
                     <input type="file" id="file" name="file" />
                 </div>
-                <input type="submit" class="btn btn-primary" value="Upload" />
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Upload</button>
             </form>
         </div>
     </div>

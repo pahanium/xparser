@@ -98,15 +98,15 @@
                                     <label for="fields-${loop.index}-weight">Weight</label>
                                     <input type="text" class="form-control" id="fields-${loop.index}-weight" name="fields[${loop.index}].weight" size="4" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
                                 </div>
-                                <a href="#" class="fields-button-remove" data-index="${loop.index}">remove</a>
+                                <a href="#" class="fields-button-remove btn btn-danger" data-index="${loop.index}"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </div>
                         </c:forEach>
                         </div>
-                        <button id="fields-button-add" type="button" class="btn btn-primary">Add Field</button>
+                        <button id="fields-button-add" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Field</button>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
             </form>
 
         </div>
@@ -140,7 +140,7 @@
                 html += '       <input type="text" class="form-control" id="fields-' + index + '-weight" name="fields[' + index + '].weight" size="4" placeholder="Weight" required>\n';
                 html += '   </div>\n';
                 html += '   <input type="hidden" id="fields-' + index + '-remove" name="fields[' + index + '].remove" value="0">\n';
-                html += '   <a href="#" class="fields-button-remove" data-index="' + index + '">remove</a>\n';
+                html += '   <a href="#" class="fields-button-remove btn btn-danger" data-index="' + index + '"><span class="glyphicon glyphicon-trash"></span> Delete</a>\n';
                 html += "</div>\n";
                 return html;
             });

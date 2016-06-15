@@ -22,8 +22,11 @@ public class Upload {
     @JoinColumn(name = "parser_id", nullable = false)
     private Parser parser;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "upload", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "upload", cascade = CascadeType.ALL)
     private List<Row> rows = new LinkedList<>();
+
+    @Column(name = "rows_count")
+    private int rowsCount;
 
     public Upload() {
     }
@@ -76,6 +79,14 @@ public class Upload {
     public void addRow(Row newRow) {
         newRow.setUpload(this);
         rows.add(newRow);
+    }
+
+    public int getRowsCount() {
+        return rowsCount;
+    }
+
+    public void setRowsCount(int rowsCount) {
+        this.rowsCount = rowsCount;
     }
 
     @PrePersist

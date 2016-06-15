@@ -58,7 +58,7 @@
 
             <h1 class="page-header">Parser List</h1>
 
-            <a href="/admin/parser-add" class="btn btn-primary" role="button">Add New Parser</a>
+            <a href="/admin/parser-add" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span> Add New Parser</a>
 
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -77,9 +77,9 @@
                             <td>${parser.name}</td>
                             <td>${parser.description}</td>
                             <td>
-                                <a href="/admin/parser-edit?id=${parser.id}">edit</a>
-                                <a href="/admin/parser-delete?id=${parser.id}">delete</a>
-                                <a href="/process?id=${parser.id}">parse</a>
+                                <a href="/process?id=${parser.id}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Parse</a>
+                                <a href="/admin/parser-edit?id=${parser.id}" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                                <a href="/admin/parser-delete?id=${parser.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

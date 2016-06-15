@@ -51,8 +51,51 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
+            <h1 class="page-header">Overview</h1>
 
+            <form action="process" method="get">
+                <div class="form-group">
+                    <label for="parser">Select Parser:</label>
+                    <select class="form-control" id="parser" name="id">
+                        <option value="1">Hello</option>
+                        <option value="2">Hi</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> New Upload</button>
+                <a href="/admin/parser-add" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span> Add New Parser</a>
+            </form>
+
+            <br><br>
+
+            <h2 class="page-header">Last Uploads</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Parser Name</th>
+                        <th>File Name</th>
+                        <th>Date</th>
+                        <th>Rows Count</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${uploads}" var="upload">
+                        <tr>
+                            <td>${upload.id}</td>
+                            <td>${upload.parser.name}</td>
+                            <td>${upload.filename}</td>
+                            <td>${upload.date}</td>
+                            <td>${upload.rowsCount}</td>
+                            <td>
+                                <a href="/export?id=${upload.id}" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download .csv</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
