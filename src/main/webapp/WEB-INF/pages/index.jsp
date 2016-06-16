@@ -57,8 +57,9 @@
                 <div class="form-group">
                     <label for="parser">Select Parser:</label>
                     <select class="form-control" id="parser" name="id">
-                        <option value="1">Hello</option>
-                        <option value="2">Hi</option>
+                        <c:forEach items="${parsers}" var="parser">
+                            <option value="${parser.id}">${parser.name}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> New Upload</button>

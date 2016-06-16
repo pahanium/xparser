@@ -1,7 +1,9 @@
 package org.pahanium.entity;
 
+import org.springframework.util.AutoPopulatingList;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "field")
@@ -13,12 +15,12 @@ public class Field implements Comparable<Field> {
     @Column(nullable = false)
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "field_function",
-            joinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "field_id", referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "field_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id")
     )
-    private Set<Function> functions;
+    private List<Function> functions = new AutoPopulatingList<>(Function.class);
 
     @Column(name = "col")
     private int column = 0;
@@ -48,11 +50,11 @@ public class Field implements Comparable<Field> {
         this.title = title;
     }
 
-    public Set<Function> getFunctions() {
+    public List<Function> getFunctions() {
         return functions;
     }
 
-    public void setFunctions(Set<Function> functions) {
+    public void setFunctions(List<Function> functions) {
         this.functions = functions;
     }
 

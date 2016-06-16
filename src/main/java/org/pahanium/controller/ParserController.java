@@ -2,6 +2,7 @@ package org.pahanium.controller;
 
 import org.pahanium.entity.Field;
 import org.pahanium.entity.Parser;
+import org.pahanium.entity.enums.FunctionTypeEnum;
 import org.pahanium.service.ParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,9 +34,11 @@ public class ParserController {
     }
 
     @RequestMapping(value = "/admin/parser-edit", method = RequestMethod.GET)
-    public ModelAndView edit(@RequestParam Long id) {
-        Parser parser = parserService.findOne(id);
-        return new ModelAndView("parser-edit", "parser", parser);
+    public String edit(@RequestParam Long id, Model model) {
+        model.addAttribute("parser", parserService.findOne(id));
+        model.addAttribute("functionTypeEnum", FunctionTypeEnum.values());
+
+        return "parser-edit";
     }
 
     // Manage dynamically added or removed Fields

@@ -82,32 +82,76 @@
                     <div class="panel-body">
                         <div id="fields-sort">
                         <c:forEach items="${parser.fields}" varStatus="loop">
-                            <div id="fields-${loop.index}-wrapper" class="form-inline field-wrapper">
-                                <span class="glyphicon glyphicon-move"></span>
-                                <input type="hidden" id="fields-${loop.index}-id" name="fields[${loop.index}].id" value="${parser.fields[loop.index].id}">
-                                <input type="hidden" id="fields-${loop.index}-remove" name="fields[${loop.index}].remove" value="0">
-                                <div class="form-group">
-                                    <label for="fields-${loop.index}-title">Title</label>
-                                    <input type="text" class="form-control" id="fields-${loop.index}-title" name="fields[${loop.index}].title" placeholder="Title" value="${parser.fields[loop.index].title}" required>
+                            <div id="fields-${loop.index}-wrapper" class="panel panel-default">
+                                <div class="form-inline fields-wrapper panel-heading">
+                                    <span class="glyphicon glyphicon-move"></span>
+                                    <input type="hidden" id="fields-${loop.index}-id" name="fields[${loop.index}].id" value="${parser.fields[loop.index].id}">
+                                    <input type="hidden" id="fields-${loop.index}-remove" name="fields[${loop.index}].remove" value="0">
+                                    <div class="form-group">
+                                        <label for="fields-${loop.index}-title">Title</label>
+                                        <input type="text" class="form-control" id="fields-${loop.index}-title" name="fields[${loop.index}].title" placeholder="Title" value="${parser.fields[loop.index].title}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fields-${loop.index}-column">Column</label>
+                                        <input type="text" class="form-control" id="fields-${loop.index}-column" name="fields[${loop.index}].column" placeholder="Column" value="${parser.fields[loop.index].column}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fields-${loop.index}-fweight">Weight</label>
+                                        <input type="text" class="form-control" id="fields-${loop.index}-fweight" name="fields[${loop.index}].weight" size="4" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
+                                    </div>
+                                    <a href="#" class="fields-button-remove btn btn-danger" data-index="${loop.index}"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                                 </div>
-                                <div class="form-group">
-                                    <label for="fields-${loop.index}-column">Column</label>
-                                    <input type="text" class="form-control" id="fields-${loop.index}-column" name="fields[${loop.index}].column" placeholder="Column" value="${parser.fields[loop.index].column}" required>
+                                <div class="panel-body">
+                                    <div id="fields-${loop.index}-functions-sort" class="fields-functions-sort">
+                                    <c:forEach items="${parser.fields[loop.index].functions}" varStatus="funcLoop">
+                                        <div id="fields-${loop.index}-functions-${funcLoop.index}-wrapper" class="form-inline functions-wrapper">
+                                            <span class="glyphicon glyphicon-move"></span>
+                                            <input type="hidden" id="fields-${loop.index}-functions-${funcLoop.index}-id" name="fields[${loop.index}].functions[${funcLoop.index}].id" value="${parser.fields[loop.index].functions[funcLoop.index].id}">
+                                            <input type="hidden" id="fields-${loop.index}-functions-${funcLoop.index}-remove" name="fields[${loop.index}].functions[${funcLoop.index}].remove" value="0">
+                                            <div class="form-group">
+                                                <label for="fields-${loop.index}-functions-${funcLoop.index}-type">Type</label>
+                                                <select class="form-control" id="fields-${loop.index}-functions-${funcLoop.index}-type" name="fields[${loop.index}].functions[${funcLoop.index}].type">
+                                                    <c:forEach items="${functionTypeEnum}" varStatus="ll">
+                                                        <c:choose>
+                                                            <c:when test="${functionTypeEnum[ll.index] eq parser.fields[loop.index].functions[funcLoop.index].type}">
+                                                                <option value="${functionTypeEnum[ll.index]}" selected>${functionTypeEnum[ll.index]}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${functionTypeEnum[ll.index]}">${functionTypeEnum[ll.index]}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fields-${loop.index}-functions-${funcLoop.index}-params">Params</label>
+                                                <input type="text" class="form-control" id="fields-${loop.index}-functions-${funcLoop.index}-params" name="fields[${loop.index}].functions[${funcLoop.index}].params" placeholder="Params" value="${parser.fields[loop.index].functions[funcLoop.index].params}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fields-${loop.index}-functions-${funcLoop.index}-weight">Weight</label>
+                                                <input type="text" class="form-control" id="fields-${loop.index}-functions-${funcLoop.index}-weight" name="fields[${loop.index}].functions[${funcLoop.index}].weight" size="4" placeholder="Weight" value="${parser.fields[loop.index].functions[funcLoop.index].weight}" required>
+                                            </div>
+                                            <a href="#" class="functions-button-remove btn btn-danger" data-parent="${loop.index}" data-index="${funcLoop.index}"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                        </div>
+                                    </c:forEach>
+                                    </div>
+                                    <a href="#" class="functions-button-add btn btn-success" data-parent="${loop.index}"><span class="glyphicon glyphicon-plus"></span> Add Function</a>
                                 </div>
-                                <div class="form-group">
-                                    <label for="fields-${loop.index}-weight">Weight</label>
-                                    <input type="text" class="form-control" id="fields-${loop.index}-weight" name="fields[${loop.index}].weight" size="4" placeholder="Weight" value="${parser.fields[loop.index].weight}" required>
-                                </div>
-                                <a href="#" class="fields-button-remove btn btn-danger" data-index="${loop.index}"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </div>
                         </c:forEach>
                         </div>
-                        <button id="fields-button-add" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Field</button>
+                        <a href="#" class="fields-button-add btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add Field</a>
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Save</button>
             </form>
+
+            <div style="display: none" id="optionsFunctionTypeEnum">
+                <c:forEach items="${functionTypeEnum}" varStatus="ll">
+                    <option value="${functionTypeEnum[ll.index]}">${functionTypeEnum[ll.index]}</option>
+                </c:forEach>
+            </div>
 
         </div>
     </div>
@@ -116,74 +160,7 @@
 <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/pages/js/html.sortable.min.js"></script>
-
-<script type="text/javascript">
-    $(function() {
-        // Start indexing at the size of the current list
-        var index = ${fn:length(parser.fields)};
-
-        // Add a new Field
-        $("#fields-button-add").on("click", function() {
-            $("#fields-sort").append(function() {
-                var html = '<div id="fields-' + index + '-wrapper" class="form-inline field-wrapper" style="display: none">\n';
-                html += '<span class="glyphicon glyphicon-move"></span>';
-                html += '   <div class="form-group">\n';
-                html += '       <label for="fields-' + index + '-title">Title</label>\n';
-                html += '       <input type="text" class="form-control" id="fields-' + index + '-title" name="fields[' + index + '].title" placeholder="Title" required>\n';
-                html += '   </div>\n';
-                html += '   <div class="form-group">\n';
-                html += '       <label for="fields-' + index + '-column">Column</label>\n';
-                html += '       <input type="text" class="form-control" id="fields-' + index + '-column" name="fields[' + index + '].column" placeholder="Column" required>\n';
-                html += '   </div>\n';
-                html += '   <div class="form-group">\n';
-                html += '       <label for="fields-' + index + '-weight">Weight</label>\n';
-                html += '       <input type="text" class="form-control" id="fields-' + index + '-weight" name="fields[' + index + '].weight" size="4" placeholder="Weight" required>\n';
-                html += '   </div>\n';
-                html += '   <input type="hidden" id="fields-' + index + '-remove" name="fields[' + index + '].remove" value="0">\n';
-                html += '   <a href="#" class="fields-button-remove btn btn-danger" data-index="' + index + '"><span class="glyphicon glyphicon-trash"></span> Delete</a>\n';
-                html += "</div>\n";
-                return html;
-            });
-            $("#fields-" + index + "-wrapper").show();
-            $("#fields-" + index + "-title").focus();
-            index++;
-
-            // Reload sort
-            $("#fields-sort").sortable('reload');
-            // Reindex weight
-            $("#fields-sort input[name$='weight']").each(function(index, element){
-                element.value = index+1;
-            });
-
-            return false;
-        });
-
-        // Remove an Field
-        $("div.fields-panel").on("click", "a.fields-button-remove", function() {
-            var index2remove = $(this).data("index");
-
-            if ($("#fields-" + index2remove + "-id").length) {
-                // If field from db, hide it
-                $("#fields-" + index2remove + "-wrapper").hide();
-                $("#fields-" + index2remove + "-remove").val("1");
-            } else {
-                // Else remove
-                $("#fields-" + index2remove + "-wrapper").remove();
-            }
-            return false;
-        });
-
-        $("#fields-sort").sortable({
-            //option
-            forcePlaceholderSize: true
-        }).bind("sortstop", function (e, ui) {
-            $("#fields-sort input[name$='weight']").each(function(index, element){
-                element.value = index+1;
-            });
-        });
-    });
-</script>
-
+<script type="text/javascript" src="/pages/js/parser-edit.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 package org.pahanium.entity.enums;
 
-public enum FunctionType {
+public enum FunctionTypeEnum {
     TRIM,
     REPLACE,
     MULTIPLICATION

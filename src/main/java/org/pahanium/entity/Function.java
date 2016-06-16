@@ -1,41 +1,41 @@
 package org.pahanium.entity;
 
-import org.pahanium.entity.enums.FunctionType;
+import org.pahanium.entity.enums.FunctionTypeEnum;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "function")
 public class Function {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private FunctionType type;
+    private FunctionTypeEnum type;
 
     private String params;
 
     private int weight;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "functions")
-    private Set<Field> fields;
+//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "functions")
+//    private List<Field> fields;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public FunctionType getType() {
+    public FunctionTypeEnum getType() {
         return type;
     }
 
-    public void setType(FunctionType type) {
+    public void setType(FunctionTypeEnum type) {
         this.type = type;
     }
 
@@ -55,11 +55,11 @@ public class Function {
         this.weight = weight;
     }
 
-    public Set<Field> getFields() {
-        return fields;
-    }
-
-    public void setFields(Set<Field> fields) {
-        this.fields = fields;
-    }
+//    public List<Field> getFields() {
+//        return fields;
+//    }
+//
+//    public void setFields(List<Field> fields) {
+//        this.fields = fields;
+//    }
 }
