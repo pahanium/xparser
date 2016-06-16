@@ -20,8 +20,12 @@ public class Function {
 
     private int weight;
 
-//    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "functions")
-//    private List<Field> fields;
+    @Transient // means "not a DB field"
+    private int remove;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "field_id", nullable = false)
+    private Field field;
 
     public long getId() {
         return id;
@@ -55,11 +59,19 @@ public class Function {
         this.weight = weight;
     }
 
-//    public List<Field> getFields() {
-//        return fields;
-//    }
-//
-//    public void setFields(List<Field> fields) {
-//        this.fields = fields;
-//    }
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
+    public int getRemove() {
+        return remove;
+    }
+
+    public void setRemove(int remove) {
+        this.remove = remove;
+    }
 }

@@ -1,6 +1,7 @@
 package org.pahanium.controller;
 
 import org.pahanium.entity.Field;
+import org.pahanium.entity.Function;
 import org.pahanium.entity.Parser;
 import org.pahanium.entity.enums.FunctionTypeEnum;
 import org.pahanium.service.ParserService;
@@ -29,8 +30,10 @@ public class ParserController {
     }
 
     @RequestMapping(value = "/admin/parser-add", method = RequestMethod.GET)
-    public ModelAndView add() {
-        return new ModelAndView("parser-edit", "parser", new Parser());
+    public String add(Model model) {
+        model.addAttribute("parser", new Parser());
+        model.addAttribute("functionTypeEnum", FunctionTypeEnum.values());
+        return "parser-edit";
     }
 
     @RequestMapping(value = "/admin/parser-edit", method = RequestMethod.GET)
@@ -49,8 +52,15 @@ public class ParserController {
                 // If the remove flag is true, remove the employee from the list
                 if (field.getRemove() == 1 || field.getTitle() == null) {
                     i.remove();
-                    // Otherwise, perform the links
                 } else {
+                    for (Iterator<Function> j = field.getFunctions().iterator(); j.hasNext(); ) {
+                        Function function = j.next();
+                        if (function.getRemove() == 1 || function.getType() == null) {
+                            j.remove();
+                        }
+                        else function.setField(field);
+                    }
+                    // Otherwise, perform the links
                     field.setParser(parser);
                 }
             }

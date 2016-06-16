@@ -15,11 +15,7 @@ public class Field implements Comparable<Field> {
     @Column(nullable = false)
     private String title;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "field_function",
-            joinColumns = @JoinColumn(name = "field_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "function_id", referencedColumnName = "id")
-    )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Function> functions = new AutoPopulatingList<>(Function.class);
 
     @Column(name = "col")
