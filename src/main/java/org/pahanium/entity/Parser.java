@@ -20,7 +20,7 @@ public class Parser {
 
     private int startLine = 1;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Field> fields = new AutoPopulatingList<>(Field.class);
 
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parser")

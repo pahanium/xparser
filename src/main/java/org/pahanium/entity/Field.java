@@ -15,7 +15,7 @@ public class Field implements Comparable<Field> {
     @Column(nullable = false)
     private String title;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "field", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Function> functions = new AutoPopulatingList<>(Function.class);
 
     @Column(name = "col")
