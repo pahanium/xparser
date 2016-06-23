@@ -2,6 +2,7 @@ package org.pahanium.service;
 
 import org.pahanium.entity.Upload;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 public interface UploadService {
@@ -12,4 +13,6 @@ public interface UploadService {
     void save(Upload upload);
 
     Upload findOne(Long id);
+
+    void export(Upload upload, PrintWriter outputStream);
 }

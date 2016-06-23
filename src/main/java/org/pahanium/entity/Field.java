@@ -26,9 +26,12 @@ public class Field implements Comparable<Field> {
     @Transient // means "not a DB field"
     private int remove;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parser_id", nullable = false)
     private Parser parser;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "field", cascade = CascadeType.ALL)
+    private List<Value> values;
 
     public long getId() {
         return id;
@@ -84,6 +87,14 @@ public class Field implements Comparable<Field> {
 
     public void setParser(Parser parser) {
         this.parser = parser;
+    }
+
+    public List<Value> getValues() {
+        return values;
+    }
+
+    public void setValues(List<Value> values) {
+        this.values = values;
     }
 
     @Override

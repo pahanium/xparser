@@ -9,9 +9,9 @@ import java.util.List;
 public class Row {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "upload_id", nullable = false)
     private Upload upload;
 
@@ -27,11 +27,11 @@ public class Row {
         this.rowNum = rowNum;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,6 +62,15 @@ public class Row {
     public void addValue(Value value) {
         value.setRow(this);
         values.add(value);
+    }
+
+    public String getValueByField(Field field) {
+        for(Value value : values) {
+            if (value.getField() == field) {
+                return value.getValue();
+            }
+        }
+        return "";
     }
 
     @Override

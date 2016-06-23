@@ -7,13 +7,13 @@ import javax.persistence.*;
 public class Value {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "row_id", nullable = false)
     private Row row;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "field_id", nullable = false)
     private Field field;
 
@@ -27,11 +27,11 @@ public class Value {
         this.value = value;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -41,6 +41,14 @@ public class Value {
 
     public void setRow(Row row) {
         this.row = row;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 
     public String getValue() {
