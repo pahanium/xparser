@@ -33,7 +33,6 @@ public class ProcessServiceImpl implements ProcessService {
         Sheet sheet = wb.getSheetAt(0);
         for (Row row : sheet) {
             org.pahanium.entity.Row newRow = new org.pahanium.entity.Row(row.getRowNum());
-            upload.addRow(newRow);
             for (Field field : fields) {
                 Cell cell = row.getCell(field.getColumn());
                 if (cell != null) {
@@ -41,7 +40,10 @@ public class ProcessServiceImpl implements ProcessService {
                     newRow.addValue(new Value(field, str));
                 }
             }
-            System.out.println(newRow);
+            if (newRow.getValues().size() > 0) {
+                upload.addRow(newRow);
+                System.out.println(newRow);
+            }
         }
 
         upload.setRowsCount(upload.getRows().size());
