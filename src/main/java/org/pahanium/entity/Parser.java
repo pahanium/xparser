@@ -18,6 +18,7 @@ public class Parser {
 
     private String description;
 
+    @Column(name = "start_line", nullable = false)
     private int startLine = 1;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parser", cascade = CascadeType.ALL, orphanRemoval = true)

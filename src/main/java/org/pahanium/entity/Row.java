@@ -15,7 +15,8 @@ public class Row {
     @JoinColumn(name = "upload_id", nullable = false)
     private Upload upload;
 
-    private int rowNum;
+    @Column(name = "row_num", nullable = false)
+    private int rowNum = -1;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "row", cascade = CascadeType.ALL)
     private List<Value> values = new LinkedList<>();

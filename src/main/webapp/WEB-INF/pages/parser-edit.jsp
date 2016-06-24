@@ -1,16 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>XParser</title>
 
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='/pages/css/main.css'>
+    <link rel='stylesheet' href='/css/main.css'>
 </head>
 <body>
 
@@ -159,8 +160,8 @@
 
 <script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/pages/js/html.sortable.min.js"></script>
-<script type="text/javascript" src="/pages/js/parser-edit.js"></script>
+<script type="text/javascript" src="/js/html.sortable.min.js"></script>
+<script type="text/javascript" src="/js/parser-edit.js"></script>
 
 </body>
 </html>

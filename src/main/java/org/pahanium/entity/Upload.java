@@ -25,8 +25,8 @@ public class Upload {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "upload", cascade = CascadeType.ALL)
     private List<Row> rows = new LinkedList<>();
 
-    @Column(name = "rows_count")
-    private int rowsCount;
+    @Column(name = "rows_count", nullable = false)
+    private int rowsCount = 0;
 
     public Upload() {
     }
