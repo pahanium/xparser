@@ -1,13 +1,16 @@
 package org.pahanium.entity;
 
 import org.pahanium.entity.enums.FunctionTypeEnum;
+import org.pahanium.function.BaseFunction;
+import org.pahanium.function.MultiplicationFunction;
+import org.pahanium.function.ReplaceFunction;
+import org.pahanium.function.TrimFunction;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "function")
-public class Function {
+public class Function implements Comparable<Function> {
     @Id
     @GeneratedValue
     private long id;
@@ -73,5 +76,26 @@ public class Function {
 
     public void setRemove(int remove) {
         this.remove = remove;
+    }
+
+    @Override
+    public int compareTo(Function o) {
+        return weight - o.weight;
+    }
+
+    static final BaseFunction trim = new TrimFunction();
+    static final BaseFunction replace = new ReplaceFunction();
+    static final BaseFunction multiplication = new MultiplicationFunction();
+
+    public String run(String value) {
+        switch (type) {
+            case TRIM:
+                return trim.run(value, params);
+            case REPLACE:
+                return replace.run(value, params);
+            case MULTIPLICATION:
+                return multiplication.run(value, params);
+        }
+        return value;
     }
 }

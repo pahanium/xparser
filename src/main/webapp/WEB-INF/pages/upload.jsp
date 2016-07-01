@@ -64,7 +64,7 @@
 
             <p>Name : ${parser.name}</p>
 
-            <form action="/process?id=${parser.id}" enctype="multipart/form-data" method="post">
+            <form action="/upload?id=${parser.id}" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label for="file">File to upload</label>
                     <input type="file" id="file" name="file" />

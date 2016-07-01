@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 @Controller
 public class ExportController {
@@ -23,7 +24,8 @@ public class ExportController {
         String filename = upload.getFilename();
         filename = filename.substring(0, filename.lastIndexOf('.')) + ".csv";
         try {
-            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+            response.setContentType("text/csv; charset=UTF-8");
+            response.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(filename, "UTF-8") + "\"");
             uploadService.export(upload, response.getWriter());
             response.flushBuffer();
         } catch (IOException e) {

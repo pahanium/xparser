@@ -2,7 +2,7 @@ package org.pahanium.controller;
 
 import org.pahanium.entity.Parser;
 import org.pahanium.service.ParserService;
-import org.pahanium.service.ProcessService;
+import org.pahanium.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -18,20 +18,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 @Controller
-public class ProcessController {
+public class UploadController {
     @Autowired
     private ParserService parserService;
 
     @Autowired
-    private ProcessService processService;
+    private UploadService uploadService;
 
-    @RequestMapping(value = "/process", method = RequestMethod.GET)
+    @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public ModelAndView index(@RequestParam Long id) {
         Parser parser = parserService.findOne(id);
-        return new ModelAndView("process", "parser", parser);
+        return new ModelAndView("upload", "parser", parser);
     }
 
-    @RequestMapping(value = "/process", method = RequestMethod.POST)
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public String submit(@RequestParam Long id, @RequestParam("file") MultipartFile multipartFile, RedirectAttributes redirectAttributes) {
         Parser parser = parserService.findOne(id);
 
@@ -45,7 +45,7 @@ public class ProcessController {
                 FileCopyUtils.copy(multipartFile.getInputStream(), stream);
                 stream.close();
 
-                processService.parse(file, parser);
+                uploadService.parse(file, parser);
 
                 redirectAttributes.addFlashAttribute("message",
                         "You successfully uploaded " + fileName + "!");
@@ -60,6 +60,6 @@ public class ProcessController {
                     "You failed to upload because the multipartFile was empty");
         }
 
-        return "redirect:/process?id=" + id;
+        return "redirect:/upload?id=" + id;
     }
 }

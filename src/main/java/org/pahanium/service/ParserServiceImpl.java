@@ -1,6 +1,7 @@
 package org.pahanium.service;
 
 import org.pahanium.entity.Field;
+import org.pahanium.entity.Function;
 import org.pahanium.entity.Parser;
 import org.pahanium.repository.ParserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,16 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public Parser findOne(Long id) {
-        Parser parser =  parserRepository.findOne(id);
+        Parser parser = parserRepository.findOne(id);
         List<Field> fields;
-        if (parser !=null && (fields = parser.getFields()) != null) {
+        if (parser != null && (fields = parser.getFields()) != null) {
             Collections.sort(fields);
+            List<Function> functions;
+            for (Field field : fields) {
+                if ((functions = field.getFunctions()) != null) {
+                    Collections.sort(functions);
+                }
+            }
         }
         return parser;
     }

@@ -78,7 +78,7 @@
                             <td>${parser.name}</td>
                             <td>${parser.description}</td>
                             <td>
-                                <a href="/process?id=${parser.id}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Parse</a>
+                                <a href="/upload?id=${parser.id}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Parse</a>
                                 <a href="/admin/parser-edit?id=${parser.id}" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                                 <a href="/admin/parser-delete?id=${parser.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </td>

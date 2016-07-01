@@ -54,7 +54,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Overview</h1>
 
-            <form action="process" method="get">
+            <form action="upload" method="get">
                 <div class="form-group">
                     <label for="parser">Select Parser:</label>
                     <select class="form-control" id="parser" name="id">
