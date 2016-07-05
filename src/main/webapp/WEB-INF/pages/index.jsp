@@ -27,9 +27,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 <li><a href="/admin/settings">Settings</a></li>
-                <li><a href="/about">About</a></li>
                 <li><a href="/help">Help</a></li>
             </ul>
         </div>
@@ -46,8 +45,8 @@
                 <li><a href="#">Export</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="#">Nav item</a></li>
-                <li><a href="#">Nav item again</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/help">Help</a></li>
             </ul>
         </div>
 

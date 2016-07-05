@@ -30,7 +30,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Home</a></li>
                 <li><a href="/admin/settings">Settings</a></li>
-                <li><a href="/about">About</a></li>
                 <li><a href="/help">Help</a></li>
             </ul>
         </div>
@@ -43,12 +42,19 @@
             <ul class="nav nav-sidebar">
                 <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
-                <li class="active"><a href="/admin/parser-add">Add New Parser</a></li>
-                <li><a href="#">Export</a></li>
+                <c:choose>
+                    <c:when test="${empty parser.name}">
+                        <li class="active"><a href="/admin/parser-add">Add New Parser</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/admin/parser-add">Add New Parser</a></li>
+                    </c:otherwise>
+                </c:choose>
+                <li><a href="/upload-list">Export</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li><a href="#">Nav item</a></li>
-                <li><a href="#">Nav item again</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/help">Help</a></li>
             </ul>
         </div>
 
@@ -67,7 +73,7 @@
                 </c:otherwise>
             </c:choose>
 
-            <form action="/admin/parser-save" method="post" modelAttribute="parser">
+            <form action="/admin/parser-edit" method="post" modelAttribute="parser">
                 <input type="hidden" name="id" value="${parser.id}">
                 <div class="form-group">
                     <label for="name">Parser Name</label>

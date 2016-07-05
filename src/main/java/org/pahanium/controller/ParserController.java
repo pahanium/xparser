@@ -26,14 +26,14 @@ public class ParserController {
 
     @RequestMapping("/admin/parser-list")
     public ModelAndView index() {
-        return new ModelAndView("parser-list", "parsers", parserService.list());
+        return new ModelAndView("admin/parser-list", "parsers", parserService.list());
     }
 
     @RequestMapping(value = "/admin/parser-add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("parser", new Parser());
         model.addAttribute("functionTypeEnum", FunctionTypeEnum.values());
-        return "parser-edit";
+        return "admin/parser-edit";
     }
 
     @RequestMapping(value = "/admin/parser-edit", method = RequestMethod.GET)
@@ -41,7 +41,7 @@ public class ParserController {
         model.addAttribute("parser", parserService.findOne(id));
         model.addAttribute("functionTypeEnum", FunctionTypeEnum.values());
 
-        return "parser-edit";
+        return "admin/parser-edit";
     }
 
     // Manage dynamically added or removed Fields
@@ -67,14 +67,14 @@ public class ParserController {
         }
     }
 
-    @RequestMapping(value = "/admin/parser-save", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/parser-edit", method = RequestMethod.POST)
     public String submit(@Valid @ModelAttribute("parser") Parser parser, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         // If we have errors, don't save
         if (bindingResult.hasErrors()) {
             // Put what they did in the model and send it back
             model.addAttribute(parser);
             model.addAttribute("message", "Error validate fields");
-            return "parser-edit";
+            return "admin/parser-edit";
         }
 
         manageParser(parser);

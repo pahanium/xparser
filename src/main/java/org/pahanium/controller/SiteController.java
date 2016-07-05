@@ -26,4 +26,14 @@ public class SiteController {
     public String login() {
         return "login";
     }
+
+    @RequestMapping("/help")
+    public String help() {
+        return "help";
+    }
+
+    @RequestMapping("/admin/settings")
+    public String settings() {
+        return "admin/settings";
+    }
 }

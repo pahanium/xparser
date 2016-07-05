@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>XParser - Upload</title>
+    <title>XParser - Help</title>
 
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/css/main.css'>
@@ -31,6 +31,7 @@
                 <li><a href="/admin/settings">Settings</a></li>
                 <li><a href="/help">Help</a></li>
             </ul>
+
         </div>
     </div>
 </nav>
@@ -51,30 +52,10 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-            <c:if test="${not empty message}">
-                <div class="alert alert-success" role="alert">${message}</div>
-            </c:if>
-            <c:if test="${not empty messageFail}">
-                <div class="alert alert-warning" role="alert">${messageFail}</div>
-            </c:if>
-
-            <h1 class="page-header">Parse</h1>
-
-            <p>Name : ${parser.name}</p>
-
-            <form action="/upload?id=${parser.id}" enctype="multipart/form-data" method="post">
-                <div class="form-group">
-                    <label for="file">File to upload</label>
-                    <input type="file" id="file" name="file" />
-                </div>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Upload</button>
-            </form>
+            <h1 class="page-header">Uploads</h1>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

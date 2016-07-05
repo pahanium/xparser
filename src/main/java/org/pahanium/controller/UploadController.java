@@ -62,4 +62,9 @@ public class UploadController {
 
         return "redirect:/upload?id=" + id;
     }
+
+    @RequestMapping("/upload-list")
+    public ModelAndView index() {
+        return new ModelAndView("upload-list", "uploads", uploadService.list());
+    }
 }

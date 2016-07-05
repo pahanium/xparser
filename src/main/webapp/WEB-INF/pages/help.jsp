@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>XParser - Upload</title>
+    <title>XParser - Help</title>
 
     <link rel='stylesheet' href='/webjars/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/css/main.css'>
@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Home</a></li>
                 <li><a href="/admin/settings">Settings</a></li>
-                <li><a href="/help">Help</a></li>
+                <li class="active"><a href="/help">Help</a></li>
             </ul>
         </div>
     </div>
@@ -42,39 +42,31 @@
                 <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
-                <li class="active"><a href="/upload-list">Export</a></li>
+                <li><a href="/upload-list">Export</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/settings">Settings</a></li>
-                <li><a href="/help">Help</a></li>
+                <li class="active"><a href="/help">Help</a></li>
             </ul>
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Help</h1>
 
-            <c:if test="${not empty message}">
-                <div class="alert alert-success" role="alert">${message}</div>
-            </c:if>
-            <c:if test="${not empty messageFail}">
-                <div class="alert alert-warning" role="alert">${messageFail}</div>
-            </c:if>
+            <p>This is demo project. Used Spring boot, Spring data, Sring security and other.</p>
 
-            <h1 class="page-header">Parse</h1>
+            <p>Main features is converting Excel file to csv. Your can setup few parser on different Excel price. You can setup witch column and how it should converted to exported csv file. For transformation values of Excel file you can use some function:</p>
 
-            <p>Name : ${parser.name}</p>
+            <ul>
+                <li><strong>Trim</strong> - leading and trailing whitespace removed</li>
+                <li><strong>Replace</strong> - replaces each substring of value that matches the given regular expression with the given replacement. For example, replace "," to "."</li>
+                <li><strong>Multiplication</strong> - multiplied by the number. For example, multiplied price by the currency</li>
+            </ul>
 
-            <form action="/upload?id=${parser.id}" enctype="multipart/form-data" method="post">
-                <div class="form-group">
-                    <label for="file">File to upload</label>
-                    <input type="file" id="file" name="file" />
-                </div>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Upload</button>
-            </form>
+            <p>For some function need specify parameters. If more then one parameters, you must divide them by <code>;</code>. For example, <em>params</em> for replace function <code>,;.</code></p>
         </div>
     </div>
 </div>
 
-<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
