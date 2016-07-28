@@ -73,7 +73,7 @@ public class UploadServiceImpl implements UploadService {
                     if (cell != null) {
                         String str = cell.toString();
                         for (Function function : field.getFunctions()) {
-                            str = function.run(str, newRow);
+                            str = function.run(str);
                         }
                         newRow.addValue(new Value(field, str));
                     }
