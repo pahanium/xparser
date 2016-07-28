@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -67,14 +68,16 @@ public class UploadServiceImpl implements UploadService {
         Sheet sheet = wb.getSheetAt(0);
         for (org.apache.poi.ss.usermodel.Row row : sheet) {
             org.pahanium.entity.Row newRow = new org.pahanium.entity.Row(row.getRowNum());
+            HashMap<String, String> vals = new HashMap<>();
             try {
                 for (Field field : fields) {
                     Cell cell = row.getCell(field.getColumn());
                     if (cell != null) {
                         String str = cell.toString();
                         for (Function function : field.getFunctions()) {
-                            str = function.run(str);
+                            str = function.run(str, vals);
                         }
+                        vals.put(field.getTitle(), str);
                         newRow.addValue(new Value(field, str));
                     }
                 }

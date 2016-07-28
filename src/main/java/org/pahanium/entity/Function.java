@@ -1,12 +1,11 @@
 package org.pahanium.entity;
 
 import org.pahanium.entity.enums.FunctionTypeEnum;
-import org.pahanium.function.BaseFunction;
-import org.pahanium.function.MultiplicationFunction;
-import org.pahanium.function.ReplaceFunction;
-import org.pahanium.function.TrimFunction;
+import org.pahanium.exception.SkipException;
+import org.pahanium.function.*;
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 @Entity
 @Table(name = "function")
@@ -86,15 +85,21 @@ public class Function implements Comparable<Function> {
     static final BaseFunction trim = new TrimFunction();
     static final BaseFunction replace = new ReplaceFunction();
     static final BaseFunction multiplication = new MultiplicationFunction();
+    static final BaseFunction skipEmpty = new SkipEmptyFunction();
+    static final BaseFunction concat = new ConcatFunction();
 
-    public String run(String value) {
+    public String run(String value, HashMap<String, String> vals) throws SkipException {
         switch (type) {
             case TRIM:
-                return trim.run(value, params);
+                return trim.run(value, params, vals);
             case REPLACE:
-                return replace.run(value, params);
+                return replace.run(value, params, vals);
             case MULTIPLICATION:
-                return multiplication.run(value, params);
+                return multiplication.run(value, params, vals);
+            case SKIPEMPTY:
+                return skipEmpty.run(value, params, vals);
+            case CONCAT:
+                return concat.run(value, params, vals);
         }
         return value;
     }

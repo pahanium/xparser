@@ -3,5 +3,7 @@ package org.pahanium.entity.enums;
 public enum FunctionTypeEnum {
     TRIM,
     REPLACE,
-    MULTIPLICATION
+    MULTIPLICATION,
+    SKIPEMPTY,
+    CONCAT,
 }
