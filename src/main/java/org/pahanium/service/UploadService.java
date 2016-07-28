@@ -8,9 +8,11 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public interface UploadService {
-    List<Upload> list();
+    List<Upload> getList(int page, int perPage);
 
     List<Upload> getLast();
+
+    Long getCount();
 
     void save(Upload upload);
 

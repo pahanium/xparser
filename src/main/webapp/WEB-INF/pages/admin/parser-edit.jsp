@@ -50,7 +50,7 @@
                         <li><a href="/admin/parser-add">Add New Parser</a></li>
                     </c:otherwise>
                 </c:choose>
-                <li><a href="/upload-list">Export</a></li>
+                <li><a href="/upload-list">Uploads</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/settings">Settings</a></li>

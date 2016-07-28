@@ -42,7 +42,7 @@
                 <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="/admin/parser-add">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
-                <li><a href="/upload-list">Export</a></li>
+                <li><a href="/upload-list">Uploads</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/settings">Settings</a></li>

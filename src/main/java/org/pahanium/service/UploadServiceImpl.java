@@ -5,8 +5,10 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.pahanium.entity.*;
+import org.pahanium.exception.SkipException;
 import org.pahanium.repository.UploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,13 +23,18 @@ public class UploadServiceImpl implements UploadService {
     private UploadRepository uploadRepository;
 
     @Override
-    public List<Upload> list() {
-        return uploadRepository.findAll();
+    public List<Upload> getList(int page, int perPage) {
+        return uploadRepository.getList(new PageRequest(page - 1, perPage));
     }
 
     @Override
     public List<Upload> getLast() {
-        return uploadRepository.getLast();
+        return getList(1, 5);
+    }
+
+    @Override
+    public Long getCount() {
+        return uploadRepository.count();
     }
 
     @Override
@@ -60,19 +67,24 @@ public class UploadServiceImpl implements UploadService {
         Sheet sheet = wb.getSheetAt(0);
         for (org.apache.poi.ss.usermodel.Row row : sheet) {
             org.pahanium.entity.Row newRow = new org.pahanium.entity.Row(row.getRowNum());
-            for (Field field : fields) {
-                Cell cell = row.getCell(field.getColumn());
-                if (cell != null) {
-                    String str = row.getCell(field.getColumn()).toString();
-                    for (Function function : field.getFunctions()) {
-                        str = function.run(str);
+            try {
+                for (Field field : fields) {
+                    Cell cell = row.getCell(field.getColumn());
+                    if (cell != null) {
+                        String str = cell.toString();
+                        for (Function function : field.getFunctions()) {
+                            str = function.run(str, newRow);
+                        }
+                        newRow.addValue(new Value(field, str));
                     }
-                    newRow.addValue(new Value(field, str));
                 }
-            }
-            if (newRow.getValues().size() > 0) {
-                upload.addRow(newRow);
-                System.out.println(newRow);
+                if (newRow.getValues().size() > 0) {
+                    upload.addRow(newRow);
+                    System.out.println(newRow);
+                }
+            } catch (SkipException e) {
+                //Skip addRow if function throws
+                System.out.println("Skip: " + newRow); //DEBUG
             }
         }
 

@@ -1,10 +1,12 @@
 package org.pahanium.controller;
 
 import org.pahanium.entity.Parser;
+import org.pahanium.entity.Upload;
 import org.pahanium.service.ParserService;
 import org.pahanium.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 @Controller
 public class UploadController {
+    public static int PER_PAGE = 10;
+
     @Autowired
     private ParserService parserService;
 
@@ -64,7 +69,20 @@ public class UploadController {
     }
 
     @RequestMapping("/upload-list")
-    public ModelAndView index() {
-        return new ModelAndView("upload-list", "uploads", uploadService.list());
+    public String index(@RequestParam(name="page", required = false, defaultValue = "1") int page, Model model) {
+        List<Upload> uploads = uploadService.getList(page, PER_PAGE);
+
+        int current = page;
+        int total = (int) (uploadService.getCount() / PER_PAGE) + 1;
+        int begin = Math.max(1, current - 5);
+        int end = Math.min(begin + 10, total);
+
+        model.addAttribute("uploads", uploads);
+        model.addAttribute("beginIndex", begin);
+        model.addAttribute("endIndex", end);
+        model.addAttribute("totalIndex", total);
+        model.addAttribute("currentIndex", current);
+
+        return "upload-list";
     }
 }

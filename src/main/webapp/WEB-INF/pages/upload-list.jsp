@@ -43,7 +43,7 @@
                 <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
-                <li class="active"><a href="/upload-list">Export</a></li>
+                <li class="active"><a href="/upload-list">Uploads</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="/admin/settings">Settings</a></li>
@@ -53,6 +53,77 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Uploads</h1>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Parser Name</th>
+                        <th>File Name</th>
+                        <th>Date</th>
+                        <th>Rows Count</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${uploads}" var="upload">
+                        <tr>
+                            <td>${upload.id}</td>
+                            <td>${upload.parser.name}</td>
+                            <td>${upload.filename}</td>
+                            <td>${upload.date}</td>
+                            <td>${upload.rowsCount}</td>
+                            <td>
+                                <a href="/export?id=${upload.id}" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download .csv</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+
+            <c:if test="${totalIndex > 1}">
+            <div>
+                <c:url var="firstUrl" value="/upload-list?page=1" />
+                <c:url var="lastUrl" value="/upload-list?page=${totalIndex}" />
+                <c:url var="prevUrl" value="/upload-list?page=${currentIndex - 1}" />
+                <c:url var="nextUrl" value="/upload-list?page=${currentIndex + 1}" />
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${currentIndex == 1}">
+                            <li class="disabled"><a href="#">&lt;&lt;</a></li>
+                            <li class="disabled"><a href="#">&lt;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="${firstUrl}">&lt;&lt;</a></li>
+                            <li><a href="${prevUrl}">&lt;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+                        <c:url var="pageUrl" value="/upload-list?page=${i}" />
+                        <c:choose>
+                            <c:when test="${i == currentIndex}">
+                                <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${currentIndex == totalIndex}">
+                            <li class="disabled"><a href="#">&gt;</a></li>
+                            <li class="disabled"><a href="#">&gt;&gt;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="${nextUrl}">&gt;</a></li>
+                            <li><a href="${lastUrl}">&gt;&gt;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
+            </c:if>
         </div>
     </div>
 </div>
