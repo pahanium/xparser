@@ -31,6 +31,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/admin/settings">Settings</a></li>
                 <li><a href="/help">Help</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
     </div>

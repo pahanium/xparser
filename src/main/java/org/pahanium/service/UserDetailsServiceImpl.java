@@ -25,7 +25,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(login + " not found");
         // указываем роли для этого пользователя
         Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(user.getRole().name()));
+        roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 
         // на основании полученныйх даных формируем объект UserDetails
         // который позволит проверить введеный пользователем логин и пароль

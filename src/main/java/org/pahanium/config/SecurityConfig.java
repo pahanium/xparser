@@ -28,7 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .antMatchers("/css/**", "/webjars/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
         http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
@@ -41,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
+        http.exceptionHandling().accessDeniedPage("/403");
     }
 
     @Bean

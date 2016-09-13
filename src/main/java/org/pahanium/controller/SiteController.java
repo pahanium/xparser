@@ -36,4 +36,9 @@ public class SiteController {
     public String settings() {
         return "admin/settings";
     }
+
+    @RequestMapping("/403")
+    public String forbidden() {
+        return "forbidden";
+    }
 }
