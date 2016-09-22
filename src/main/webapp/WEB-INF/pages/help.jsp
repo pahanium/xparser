@@ -55,17 +55,27 @@
             <h1 class="page-header">Help</h1>
 
             <p>This is demo project. Used Spring boot, Spring data, Sring security and other.</p>
-
-            <p>Main features is converting Excel file to csv. Your can setup few parser on different Excel price. You can setup witch column and how it should converted to exported csv file. For transformation values of Excel file you can use some function:</p>
-
+            <p>Main features is converting Excel file to csv.
+                For example some internet shop has import csv file. But providers of product give own price in different Excel format.
+                This application help convert Excel file to csv file. You must specify required columns and functions for converting in your parser.
+                Then upload Excel file. After this you can download csv file for internet shop.
+            </p>
+            <p>For example download <a href="/export-test">test.xlsx</a> Excel file and test on parser named "test".</p>
+            </p>
+            <p>
+                Also, your can setup few parser on different Excel price. You can setup witch column and how it should converted to exported csv file.
+                For transformation values of Excel file you can use this function:
+            </p>
             <ul>
                 <li><strong>Trim</strong> - leading and trailing whitespace removed</li>
                 <li><strong>Replace</strong> - replaces each substring of value that matches the given regular expression with the given replacement. For example, replace "," to "."</li>
                 <li><strong>Multiplication</strong> - multiplied by the number. For example, multiplied price by the currency</li>
+                <li><strong>Concat</strong> - concat value of this column (<code>{value}</code>) with other processed column (<code>{column_name}</code>) or simple text.
+                    For example for column "title" you can concat "brand" with this <em>params</em> <code>{brand}; ;{value}</code></li>
+                <li><strong>SkipEmpty</strong> - this function allow skip some row with empty value of column</li>
             </ul>
 
             <p>For some function need specify parameters. If more then one parameters, you must divide them by <code>;</code>. For example, <em>params</em> for replace function <code>,;.</code></p>
-
             <p>User <code>admin</code> has all permissions. User <code>demo</code> has no access to edit parser or add new.</p>
         </div>
     </div>

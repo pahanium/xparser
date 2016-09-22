@@ -56,13 +56,14 @@
 
             <div class="well">
                 <p>
-                    This is main page of converter xsl to csv. For more detail see <a href="/help">help</a>.
+                    This is main page of converter Excel file to csv. For more detail see <a href="/help">help</a>.
                     Here you can:
                 </p>
                 <ul>
                     <li>select parser to upload Excel price</li>
                     <li>download csv file of last 5 uploaded Excel file</li>
                 </ul>
+                <p>Downlod <a href="/export-test">test.xlsx</a> for testing with parser "Test"</p>
             </div>
 
 
