@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview</a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li class="active"><a href="/upload-list">Uploads</a></li>
@@ -129,5 +129,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

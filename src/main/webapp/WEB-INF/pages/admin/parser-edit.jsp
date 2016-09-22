@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview</a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <c:choose>
                     <c:when test="${empty parser.name}">
@@ -73,6 +73,13 @@
                     <h1 class="page-header">Update Parser</h1>
                 </c:otherwise>
             </c:choose>
+
+            <div class="well">
+                <p>This form allow edit name and fieds of parser. Field is a column of Excel table witch needed to
+                    export to csv. Each field can be converted via functions. Fields and functions can be sorted by
+                    drug & drop. Title of fields is a header for csv file. Column is an index of Excel column.
+                </p>
+            </div>
 
             <form action="/admin/parser-edit" method="post" modelAttribute="parser">
                 <input type="hidden" name="id" value="${parser.id}">

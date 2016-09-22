@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview</a></li>
                 <li class="active"><a href="/admin/parser-add">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="/upload-list">Uploads</a></li>
@@ -58,6 +58,10 @@
             </c:if>
 
             <h1 class="page-header">Parser List</h1>
+
+            <div class="well">
+                <p>You can add new parser for Excel file or edit/delete existing. For processing Excel price press "New Upload".</p>
+            </div>
 
             <a href="/admin/parser-add" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span> Add New Parser</a>
 
@@ -78,9 +82,9 @@
                             <td>${parser.name}</td>
                             <td>${parser.description}</td>
                             <td>
-                                <a href="/upload?id=${parser.id}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Parse</a>
+                                <a href="/upload?id=${parser.id}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> New Upload</a>
                                 <a href="/admin/parser-edit?id=${parser.id}" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-                                <a href="/admin/parser-delete?id=${parser.id}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+                                <a href="/admin/parser-delete?id=${parser.id}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><span class="glyphicon glyphicon-trash"></span> Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/">Overview</a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="/upload-list">Uploads</a></li>
@@ -54,17 +54,35 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Overview</h1>
 
+            <div class="well">
+                <p>
+                    This is main page of converter xsl to csv. For more detail see <a href="/help">help</a>.
+                    Here you can:
+                </p>
+                <ul>
+                    <li>select parser to upload Excel price</li>
+                    <li>download csv file of last 5 uploaded Excel file</li>
+                </ul>
+            </div>
+
+
+            <h2 class="page-header">Upload Excel Price</h2>
+
             <form action="upload" method="get">
                 <div class="form-group">
                     <label for="parser">Select Parser:</label>
-                    <select class="form-control" id="parser" name="id">
-                        <c:forEach items="${parsers}" var="parser">
-                            <option value="${parser.id}">${parser.name}</option>
-                        </c:forEach>
-                    </select>
+                    <div class="input-group">
+                        <select class="form-control" id="parser" name="id">
+                            <c:forEach items="${parsers}" var="parser">
+                                <option value="${parser.id}">${parser.name}</option>
+                            </c:forEach>
+                        </select>
+                        <div class="input-group-button">
+                            <a href="/admin/parser-add" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span> Add New Parser</a>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> New Upload</button>
-                <a href="/admin/parser-add" class="btn btn-success" role="button"><span class="glyphicon glyphicon-plus"></span> Add New Parser</a>
             </form>
 
             <br><br>
@@ -75,29 +93,30 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th></th>
                         <th>Parser Name</th>
                         <th>File Name</th>
                         <th>Date</th>
                         <th>Rows Count</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${uploads}" var="upload">
                         <tr>
                             <td>${upload.id}</td>
+                            <td>
+                                <a href="/export?id=${upload.id}" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download .csv</a>
+                            </td>
                             <td>${upload.parser.name}</td>
                             <td>${upload.filename}</td>
                             <td>${upload.date}</td>
                             <td>${upload.rowsCount}</td>
-                            <td>
-                                <a href="/export?id=${upload.id}" class="btn btn-success"><span class="glyphicon glyphicon-download-alt"></span> Download .csv</a>
-                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table>
             </div>
+            <div class="pull-right"><a href="/upload-list">Show more...</a></div>
         </div>
     </div>
 </div>

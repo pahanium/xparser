@@ -82,3 +82,10 @@ body {
 .login-error {
     padding: 15px;
 }
+
+.input-group-button {
+    display: table-cell;
+    padding-left: 10px;
+    width: 1%;
+    vertical-align: middle;
+}

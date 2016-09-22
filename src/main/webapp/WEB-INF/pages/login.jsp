@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div align="center">
+<%--<div align="center">--%>
     <div class="container">
         <c:url value="/j_spring_security_check" var="loginUrl" />
         <form action="${loginUrl}" method="POST" class="form-login">
@@ -31,6 +31,9 @@
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
+            <span id="helpBlock" class="help-block">
+                You may login with admin/admin or demo/demo
+            </span>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
         </form>
     </div> <!-- /container -->

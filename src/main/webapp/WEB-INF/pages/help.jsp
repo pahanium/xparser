@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview</a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="/upload-list">Uploads</a></li>
@@ -65,9 +65,13 @@
             </ul>
 
             <p>For some function need specify parameters. If more then one parameters, you must divide them by <code>;</code>. For example, <em>params</em> for replace function <code>,;.</code></p>
+
+            <p>User <code>admin</code> has all permissions. User <code>demo</code> has no access to edit parser or add new.</p>
         </div>
     </div>
 </div>
 
+<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

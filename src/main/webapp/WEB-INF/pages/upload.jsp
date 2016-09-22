@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="/">Overview <span class="sr-only">(current)</span></a></li>
+                <li><a href="/">Overview</a></li>
                 <li><a href="/admin/parser-list">Parser list</a></li>
                 <li><a href="/admin/parser-add">Add New Parser</a></li>
                 <li><a href="/upload-list">Uploads</a></li>
@@ -60,16 +60,16 @@
                 <div class="alert alert-warning" role="alert">${messageFail}</div>
             </c:if>
 
-            <h1 class="page-header">Parse</h1>
+            <h1 class="page-header">Parse "${parser.name}"</h1>
 
-            <p>Name : ${parser.name}</p>
+
 
             <form action="/upload?id=${parser.id}" enctype="multipart/form-data" method="post">
                 <div class="form-group">
                     <label for="file">File to upload</label>
                     <input type="file" id="file" name="file" />
                 </div>
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Upload</button>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-play"></span> Upload and parse</button>
             </form>
         </div>
     </div>
