@@ -91,6 +91,10 @@
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="${parser.description}">
                 </div>
+                <div class="form-group">
+                    <label for="startLine">Start Line</label>
+                    <input type="text" class="form-control" id="startLine" name="startLine" placeholder="Start Line" value="${parser.startLine}">
+                </div>
 
                 <div class="fields-panel panel panel-default">
                     <div class="panel-heading">Fields List</div>

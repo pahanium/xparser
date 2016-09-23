@@ -67,19 +67,25 @@ public class UploadServiceImpl implements UploadService {
         // for (int i = 0; i < wb.getNumberOfSheets(); i++) {
         Sheet sheet = wb.getSheetAt(0);
         for (org.apache.poi.ss.usermodel.Row row : sheet) {
+            if (row.getRowNum()< parser.getStartLine()) {
+                continue;
+            }
             org.pahanium.entity.Row newRow = new org.pahanium.entity.Row(row.getRowNum());
             HashMap<String, String> vals = new HashMap<>();
             try {
                 for (Field field : fields) {
-                    Cell cell = row.getCell(field.getColumn());
-                    if (cell != null) {
-                        String str = cell.toString();
-                        for (Function function : field.getFunctions()) {
-                            str = function.run(str, vals);
+                    String str = "";
+                    if (field.getColumn() > -1) {
+                        Cell cell = row.getCell(field.getColumn());
+                        if (cell != null) {
+                            str = cell.toString();
                         }
-                        vals.put(field.getTitle(), str);
-                        newRow.addValue(new Value(field, str));
                     }
+                    for (Function function : field.getFunctions()) {
+                        str = function.run(str, vals);
+                    }
+                    vals.put(field.getTitle(), str);
+                    newRow.addValue(new Value(field, str));
                 }
                 if (newRow.getValues().size() > 0) {
                     upload.addRow(newRow);
