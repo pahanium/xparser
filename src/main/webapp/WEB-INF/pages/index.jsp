@@ -52,6 +52,14 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <c:if test="${not empty message}">
+                <div class="alert alert-success" role="alert">${message}</div>
+            </c:if>
+            <c:if test="${not empty messageFail}">
+                <div class="alert alert-warning" role="alert">${messageFail}</div>
+            </c:if>
+
             <h1 class="page-header">Overview</h1>
 
             <div class="well">

@@ -54,6 +54,7 @@ public class UploadController {
 
                 redirectAttributes.addFlashAttribute("message",
                         "You successfully uploaded " + fileName + "!");
+                return "redirect:/";
             }
             catch (Exception e) {
                 redirectAttributes.addFlashAttribute("messageFail",
