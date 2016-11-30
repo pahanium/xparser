@@ -81,26 +81,4 @@ public class Function implements Comparable<Function> {
     public int compareTo(Function o) {
         return weight - o.weight;
     }
-
-    static final BaseFunction trim = new TrimFunction();
-    static final BaseFunction replace = new ReplaceFunction();
-    static final BaseFunction multiplication = new MultiplicationFunction();
-    static final BaseFunction skipEmpty = new SkipEmptyFunction();
-    static final BaseFunction concat = new ConcatFunction();
-
-    public String run(String value, HashMap<String, String> vals) throws SkipException {
-        switch (type) {
-            case TRIM:
-                return trim.run(value, params, vals);
-            case REPLACE:
-                return replace.run(value, params, vals);
-            case MULTIPLICATION:
-                return multiplication.run(value, params, vals);
-            case SKIPEMPTY:
-                return skipEmpty.run(value, params, vals);
-            case CONCAT:
-                return concat.run(value, params, vals);
-        }
-        return value;
-    }
 }

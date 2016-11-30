@@ -23,6 +23,9 @@ public class UploadServiceImpl implements UploadService {
     @Autowired
     private UploadRepository uploadRepository;
 
+    @Autowired
+    private FunctionService functionService;
+
     @Override
     public List<Upload> getList(int page, int perPage) {
         return uploadRepository.getList(new PageRequest(page - 1, perPage));
@@ -82,7 +85,7 @@ public class UploadServiceImpl implements UploadService {
                         }
                     }
                     for (Function function : field.getFunctions()) {
-                        str = function.run(str, vals);
+                        str = functionService.run(function, str, vals);
                     }
                     vals.put(field.getTitle(), str);
                     newRow.addValue(new Value(field, str));
